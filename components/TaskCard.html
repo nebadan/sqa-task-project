@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskCard Component Test</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div id="component-container"></div>
+
+    <script>
+        // Mock task data and functions for testing
+        window.renderTaskCard = function(task) {
+            const container = document.getElementById('component-container');
+            container.innerHTML = '';
+            
+            const card = document.createElement('div');
+            card.className = `task-card ${task.status === 'completed' ? 'completed' : ''}`;
+            card.setAttribute('data-testid', 'task-card');
+
+            card.innerHTML = `
+                <h3 class="task-title" data-testid="task-title">${task.title}</h3>
+                <p class="task-description">${task.description}</p>
+                <div class="task-meta">
+                    <span>Due: ${new Date(task.dueDate).toLocaleDateString()}</span>
+                    <span class="task-status" data-testid="task-status">${task.status}</span>
+                </div>
+                <div class="task-actions">
+                    <button onclick="editTask('${task.id}')" data-testid="edit-task-button">Edit</button>
+                    <button onclick="deleteTask('${task.id}')" data-testid="delete-task-button">Delete</button>
+                    ${task.status === 'pending' ? 
+                        `<button onclick="completeTask('${task.id}')" data-testid="complete-task-button">Complete</button>` : 
+                        ''}
+                </div>
+            `;
+
+            container.appendChild(card);
+        };
+
+        window.completeTask = function(taskId) {
+            const statusElement = document.querySelector('[data-testid="task-status"]');
+            const cardElement = document.querySelector('[data-testid="task-card"]');
+            
+            statusElement.textContent = 'completed';
+            cardElement.classList.add('completed');
+            
+            // Hide complete button
+            const completeButton = document.querySelector('[data-testid="complete-task-button"]');
+            if (completeButton) {
+                completeButton.remove();
+            }
+        };
+
+        window.editTask = function(taskId) {
+            console.log('Edit task:', taskId);
+        };
+
+        window.deleteTask = function(taskId) {
+            console.log('Delete task:', taskId);
+        };
+    </script>
+</body>
+</html> 

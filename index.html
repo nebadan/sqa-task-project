@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Login Page -->
+        <div id="login-page" class="page">
+            <div class="login-container">
+                <h1>Task Management</h1>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" data-testid="email-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" data-testid="password-input" required>
+                    </div>
+                    <div id="error-message" data-testid="error-message" class="error-message"></div>
+                    <button type="submit" data-testid="login-button">Login</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboard-page" class="page hidden">
+            <header>
+                <h1>Task Dashboard</h1>
+                <div class="user-info">
+                    <span id="welcome-message" data-testid="welcome-message"></span>
+                    <button id="logout-button" data-testid="logout-button">Logout</button>
+                </div>
+            </header>
+
+            <main>
+                <div class="task-controls">
+                    <button id="new-task-button" data-testid="new-task-button">New Task</button>
+                </div>
+
+                <div id="task-list" data-testid="task-list"></div>
+            </main>
+        </div>
+
+        <!-- Admin Page -->
+        <div id="admin-page" class="page hidden">
+            <header>
+                <h1>Admin Dashboard</h1>
+                <div class="user-info">
+                    <span>Admin Panel</span>
+                    <button id="admin-logout-button" data-testid="admin-logout-button">Logout</button>
+                </div>
+            </header>
+
+            <main>
+                <div id="admin-dashboard" data-testid="admin-dashboard">
+                    <h2>User Management</h2>
+                    <div id="user-list"></div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Task Form Modal -->
+        <div id="task-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Task Details</h2>
+                <form id="task-form">
+                    <div class="form-group">
+                        <label for="task-title">Title</label>
+                        <input type="text" id="task-title" data-testid="task-title-input" required>
+                        <div class="error-message" data-testid="title-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-description">Description</label>
+                        <textarea id="task-description" data-testid="task-description-input" required></textarea>
+                        <div class="error-message" data-testid="description-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-due-date">Due Date</label>
+                        <input type="date" id="task-due-date" data-testid="task-due-date-input" required>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" id="cancel-task">Cancel</button>
+                        <button type="submit" data-testid="save-task-button">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Delete Confirmation Modal -->
+        <div id="delete-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Confirm Delete</h2>
+                <p>Are you sure you want to delete this task?</p>
+                <div class="modal-buttons">
+                    <button type="button" id="cancel-delete">Cancel</button>
+                    <button type="button" id="confirm-delete" data-testid="confirm-delete-button">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html> 

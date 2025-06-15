@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskForm Component Test</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="modal-content">
+        <h2>Task Details</h2>
+        <form id="task-form">
+            <div class="form-group">
+                <label for="task-title">Title</label>
+                <input type="text" id="task-title" data-testid="task-title-input" required>
+                <div class="error-message" data-testid="title-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="task-description">Description</label>
+                <textarea id="task-description" data-testid="task-description-input" required></textarea>
+                <div class="error-message" data-testid="description-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="task-due-date">Due Date</label>
+                <input type="date" id="task-due-date" data-testid="task-due-date-input" required>
+            </div>
+            <div class="modal-buttons">
+                <button type="button" id="cancel-task">Cancel</button>
+                <button type="submit" data-testid="save-task-button">Save</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('task-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('task-title').value.trim();
+            const description = document.getElementById('task-description').value.trim();
+
+            // Clear previous errors
+            document.querySelector('[data-testid="title-error"]').textContent = '';
+            document.querySelector('[data-testid="description-error"]').textContent = '';
+
+            // Validate form
+            let hasErrors = false;
+            if (!title) {
+                document.querySelector('[data-testid="title-error"]').textContent = 'Title is required';
+                hasErrors = true;
+            }
+            if (!description) {
+                document.querySelector('[data-testid="description-error"]').textContent = 'Description is required';
+                hasErrors = true;
+            }
+
+            if (!hasErrors) {
+                console.log('Form submitted successfully');
+            }
+        });
+    </script>
+</body>
+</html> 
